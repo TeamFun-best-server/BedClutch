@@ -1,0 +1,32 @@
+commands:
+  enabled:
+    join: false
+    leave: false
+  join_arena:
+    - "/DoSomething"
+  leave_arena:
+    - "/DoSomething"
+
+menu:
+  size: 1 # 2 lines in the gui
+  options:
+    0: # this is the slot of the hit
+      displayName: "&bStick Hit" # this shows in the gui
+      name: "&b&lStick" # this shows when you're getting hit (as the title)
+      lore: "&7Basic stick hit!" # empty for nothing
+      block: "STICK:0"
+      hit:
+        power: 1
+        vertical: 0.45
+        hits: 2
+        diagonal: false
+    1:
+      displayName: "&bDiagonal Stick Hit"
+      name: "&b&lDiagonal"
+      lore: "&7Basic stick hit but diagonal!"
+      block: "WOOD_STAIRS:0"
+      hit:
+        power: 0.7
+        vertical: 0.45
+        hits: 2
+        diagonal: true

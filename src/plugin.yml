@@ -1,0 +1,14 @@
+name: BedClutch
+version: 2.0
+author: hi12167pies
+main: me.hi12167pies.BedClutch.Main
+commands:
+  bedclutch:
+    usage: /bedclutch <join/leave> [map]
+    description: The main commands for joining / leaving.
+  bedclutchmaps:
+    usage: /bedclutchmaps <setspawn/delete> <map>
+    permission: bedclutch.maps
+    permission-message: §cYou do have permission to execute that command.
+    aliases:
+      - bedclutchmap
