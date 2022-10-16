@@ -50,6 +50,7 @@ public class GUIHandler implements Listener {
         if (e.getInventory().getHolder() == holder) {
             e.setCancelled(true);
         }
+        if (e.getClickedInventory() == null) return;
         if (e.getClickedInventory().getHolder() == holder) {
             int hitID = e.getRawSlot();
             if (e.getCurrentItem().getType() == Material.AIR) return;
