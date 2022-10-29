@@ -24,5 +24,6 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new GUIHandler(), this);
         Bukkit.getPluginManager().registerEvents(new Interact(), this);
         Bukkit.getPluginManager().registerEvents(new WorldChange(), this);
+        Bukkit.getPluginManager().registerEvents(new Join(), this);
     }
 }

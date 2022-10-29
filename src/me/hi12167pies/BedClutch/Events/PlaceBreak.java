@@ -26,9 +26,10 @@ public class PlaceBreak implements Listener {
             player.getItemInHand().setAmount(64);
         }
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, new Runnable() {@Override public void run() {
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
+            e.getBlockPlaced().getLocation().getChunk().load();
             e.getBlockPlaced().setType(Material.AIR);
-        }}, 60);
+        }, 60);
 
     }
 }

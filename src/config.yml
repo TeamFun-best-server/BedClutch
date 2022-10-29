@@ -1,3 +1,7 @@
+bungeecord:
+  enabled: false
+  map: default
+
 commands:
   enabled:
     join: false
