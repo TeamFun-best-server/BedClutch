@@ -1,5 +1,6 @@
 package me.hi12167pies.BedClutch.Commands;
 
+import me.hi12167pies.BedClutch.Main;
 import me.hi12167pies.BedClutch.Utils.Arenas;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +19,10 @@ public class BedClutch implements CommandExecutor {
             } else sender.sendMessage(command.getUsage());
         } else if (args.length >= 1) {
             if (args[0].equals("leave")) {
-                Arenas.leave(player);
+                if (!Main.instance.getConfig().getBoolean("bungeecord.enabled"))
+                    Arenas.leave(player);
+                else
+                    player.sendMessage("you cant leave in bungeecord mode, please use a lobby command.");
             } else sender.sendMessage(command.getUsage());
         } else sender.sendMessage(command.getUsage());
 
