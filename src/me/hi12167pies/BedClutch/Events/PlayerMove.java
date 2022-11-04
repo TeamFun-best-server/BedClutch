@@ -1,6 +1,7 @@
 package me.hi12167pies.BedClutch.Events;
 
 import me.hi12167pies.BedClutch.Utils.Arenas;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,6 +12,7 @@ public class PlayerMove implements Listener {
     void e(PlayerMoveEvent e) {
         Player player = e.getPlayer();
 
+        if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
         if (!Arenas.isPlaying(player)) return;
 
         if (player.getLocation().getY() < Arenas.getVoid(player)) {
