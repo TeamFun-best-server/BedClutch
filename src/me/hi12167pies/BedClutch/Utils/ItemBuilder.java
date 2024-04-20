@@ -15,20 +15,15 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class ItemBuilder {
-    public static void setField(Object obj, String name, Object value) {
-        try {
-            Field field = obj.getClass().getDeclaredField(name);
-            field.setAccessible(true);
-            field.set(obj, value);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-    }
     ItemStack itemStack;
     ItemMeta meta;
 
     public ItemBuilder(Material material) {
         itemStack = new ItemStack(material);
+        meta = itemStack.getItemMeta();
+    }
+    public ItemBuilder(Material material, byte b) {
+        itemStack = new ItemStack(material, 1, b);
         meta = itemStack.getItemMeta();
     }
 
@@ -92,15 +87,6 @@ public class ItemBuilder {
     public ItemBuilder owner(String name) {
         SkullMeta skull = (SkullMeta) meta;
         skull.setOwner(name);
-        itemStack.setItemMeta(skull);
-        return this;
-    }
-
-    public ItemBuilder url(String url) {
-        SkullMeta skull = (SkullMeta) meta;
-        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "");
-        gameProfile.getProperties().put("textures", new Property("textures", url));
-        setField(skull, "profile", gameProfile);
         itemStack.setItemMeta(skull);
         return this;
     }

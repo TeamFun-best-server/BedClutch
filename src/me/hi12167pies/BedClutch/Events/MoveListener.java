@@ -5,14 +5,18 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 
-public class WorldChange implements Listener {
+public class MoveListener implements Listener {
     @EventHandler
-    void a(PlayerChangedWorldEvent e) {
+    void e(PlayerMoveEvent e) {
         Player player = e.getPlayer();
+
         if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
-        if (Arenas.isPlaying(player))
-            Arenas.leave(player);
+        if (!Arenas.isPlaying(player)) return;
+
+        if (player.getLocation().getY() < Arenas.getVoid(player)) {
+            Arenas.teleportSpawn(player);
+        }
     }
 }

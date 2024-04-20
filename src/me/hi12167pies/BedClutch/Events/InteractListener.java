@@ -11,9 +11,9 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class Interact implements Listener {
+public class InteractListener implements Listener {
     @EventHandler
-    void a(PlayerInteractEvent e) {
+    public void event(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         if (!Arenas.isPlaying(player)) return;
 

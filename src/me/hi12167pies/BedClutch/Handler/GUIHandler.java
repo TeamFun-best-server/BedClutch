@@ -45,7 +45,7 @@ public class GUIHandler implements Listener {
     }
     public static HashMap<Player, Integer> lastHit = new HashMap<>();
     @EventHandler
-    void a(InventoryClickEvent e) {
+    public void event(InventoryClickEvent e) {
         Player player = (Player) e.getWhoClicked();
         if (e.getInventory().getHolder() == holder) {
             e.setCancelled(true);

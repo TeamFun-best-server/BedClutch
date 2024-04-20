@@ -19,10 +19,11 @@ public class BedClutch implements CommandExecutor {
             } else sender.sendMessage(command.getUsage());
         } else if (args.length >= 1) {
             if (args[0].equals("leave")) {
-                if (!Main.instance.getConfig().getBoolean("bungeecord.enabled"))
+                if (!Main.instance.getConfig().getBoolean("bungeecord.enabled")) {
                     Arenas.leave(player);
-                else
-                    player.sendMessage("you cant leave in bungeecord mode, please use a lobby command.");
+                } else {
+                    player.sendMessage("You cant leave in bungeecord mode, please use a lobby command.");
+                }
             } else sender.sendMessage(command.getUsage());
         } else sender.sendMessage(command.getUsage());
 

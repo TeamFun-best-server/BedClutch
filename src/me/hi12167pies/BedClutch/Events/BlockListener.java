@@ -11,16 +11,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class PlaceBreak implements Listener {
+public class BlockListener implements Listener {
     @EventHandler
-    void a(BlockBreakEvent e) {
+    public void event(BlockBreakEvent e) {
         Player player = e.getPlayer();
         if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
         if (!Arenas.isPlaying(player)) return;
         e.setCancelled(true);
     }
     @EventHandler
-    void a(BlockPlaceEvent e) {
+    public void event(BlockPlaceEvent e) {
         Player player = e.getPlayer();
 
         if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
@@ -32,8 +32,13 @@ public class PlaceBreak implements Listener {
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
             e.getBlockPlaced().getLocation().getChunk().load();
+            e.getBlockPlaced().setType(Material.REDSTONE_BLOCK);
+        }, 80);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
+            e.getBlockPlaced().getLocation().getChunk().load();
             e.getBlockPlaced().setType(Material.AIR);
-        }, 60);
+        }, 100);
 
     }
 }

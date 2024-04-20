@@ -18,12 +18,13 @@ public class Main extends JavaPlugin {
         Bukkit.getPluginCommand("bedclutch").setExecutor(new BedClutch());
         Bukkit.getPluginCommand("bedclutchmaps").setExecutor(new BedClutchMaps());
 
-        Bukkit.getPluginManager().registerEvents(new PlayerMove(), this);
-        Bukkit.getPluginManager().registerEvents(new PlaceBreak(), this);
-        Bukkit.getPluginManager().registerEvents(new Damage(), this);
+        Bukkit.getPluginManager().registerEvents(new MoveListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BlockListener(), this);
+        Bukkit.getPluginManager().registerEvents(new DamageListener(), this);
         Bukkit.getPluginManager().registerEvents(new GUIHandler(), this);
-        Bukkit.getPluginManager().registerEvents(new Interact(), this);
-        Bukkit.getPluginManager().registerEvents(new WorldChange(), this);
-        Bukkit.getPluginManager().registerEvents(new Join(), this);
+        Bukkit.getPluginManager().registerEvents(new InteractListener(), this);
+        Bukkit.getPluginManager().registerEvents(new WorldChangeListener(), this);
+        Bukkit.getPluginManager().registerEvents(new JoinListener(), this);
+        Bukkit.getPluginManager().registerEvents(new DropListener(), this);
     }
 }
