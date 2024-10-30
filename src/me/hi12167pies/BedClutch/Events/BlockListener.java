@@ -10,35 +10,53 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class BlockListener implements Listener {
+
     @EventHandler
-    public void event(BlockBreakEvent e) {
+    public void onBlockBreak(BlockBreakEvent e) {
         Player player = e.getPlayer();
-        if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
+        if (player.getGameMode() == GameMode.CREATIVE) return;
         if (!Arenas.isPlaying(player)) return;
+
+        // Annuleer het standaard breekgedrag
         e.setCancelled(true);
+
+        // Start de blokbreektaak met een vertraging
+        Bukkit.getScheduler().runTaskLater(Main.instance, () -> {
+            // Breek het blok handmatig
+            e.getBlock().breakNaturally();
+
+            // Optioneel: geef een item terug aan de speler
+            ItemStack drop = new ItemStack(e.getBlock().getType());
+            player.getWorld().dropItemNaturally(e.getBlock().getLocation(), drop);
+
+        }, 100); // 100 ticks is 5 seconden (20 ticks per seconde)
     }
+
     @EventHandler
-    public void event(BlockPlaceEvent e) {
+    public void onBlockPlace(BlockPlaceEvent e) {
         Player player = e.getPlayer();
 
-        if (e.getPlayer().getGameMode() == GameMode.CREATIVE) return;
+        if (player.getGameMode() == GameMode.CREATIVE) return;
         if (!Arenas.isPlaying(player)) return;
 
-        if (player.getItemInHand().getAmount() > 31) {
-            player.getItemInHand().setAmount(64);
+        // Controleer of de speler meer dan 31 items in de hand heeft
+        if (player.getInventory().getItemInHand().getAmount() > 31) {
+            player.getInventory().getItemInHand().setAmount(64);
         }
 
+        // Blok plaatsen met vertraging
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
             e.getBlockPlaced().getLocation().getChunk().load();
             e.getBlockPlaced().setType(Material.REDSTONE_BLOCK);
-        }, 80);
+        }, 80); // 80 ticks na het plaatsen
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(Main.instance, () -> {
             e.getBlockPlaced().getLocation().getChunk().load();
             e.getBlockPlaced().setType(Material.AIR);
-        }, 100);
-
+        }, 100); // 100 ticks voor het verwijderen van het blok
     }
 }
+
