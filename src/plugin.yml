@@ -1,6 +1,6 @@
 name: BedClutch
-version: 2.0.2
-author: hi12167pies
+version: 2.0.3
+author: hi12167pies TeamFun forked
 main: me.hi12167pies.BedClutch.Main
 commands:
   bedclutch:
